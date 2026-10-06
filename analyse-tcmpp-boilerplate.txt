@@ -1,0 +1,115 @@
+ANALYSE DU PROJET TCMPP BOILERPLATE
+===================================
+
+Conclusion
+----------
+
+Ce projet sert principalement a developper une mini-app TCMPP (Tencent Cloud
+Mini Program Platform). Ce n'est pas un projet d'application mobile native
+Android ou iOS produisant directement un fichier APK ou IPA.
+
+La mini-app s'execute dans une application hote compatible TCMPP, avec un
+runtime proche de celui des mini-programmes WeChat. Elle utilise les APIs
+wx.* et se compile avec les TCMPP Developer Tools.
+
+Preuves dans le projet
+----------------------
+
+1. README.md indique explicitement que le depot est une base pour construire
+   des TCMPP mini-apps.
+2. project.config.json contient compileType: miniprogram et la version du SDK
+   TCMPP.
+3. app.json declare les pages, la fenetre et les permissions de la mini-app.
+4. Les pages utilisent Page(), les composants utilisent Component(), et la
+   navigation utilise wx.navigateTo().
+5. Les fichiers .wxml, .wxss et .wxs sont specifiques au modele
+   mini-programme.
+
+Ce que fournit le boilerplate
+-----------------------------
+
+- Deux pages d'exemple : accueil et demonstration.
+- Des composants UI reutilisables : bouton, modal, barre de navigation,
+  input, stepper, typography et autres.
+- Un EventBus pour l'etat partage et la communication entre pages.
+- Un client HTTP avec authentification OAuth2 et gestion de session.
+- Un service d'acces aux plugins natifs via wx.invokeNativePlugin.
+- La navigation, le stockage local, la gestion du chargement et des erreurs.
+- JSON Sculpt pour transformer les reponses des APIs.
+- Des filtres WXS pour la logique d'affichage.
+
+Fichiers principaux a regarder
+------------------------------
+
+- README.md : vue d'ensemble, demarrage rapide et structure du projet.
+- app.json : pages, configuration de la fenetre et permissions.
+- project.config.json : type de compilation, SDK TCMPP et reglages DevTools.
+- app.js : cycle de vie global, initialisation, reseau, mises a jour et
+  gestion des erreurs.
+- pages/index/index.js et index.wxml : exemple de page et navigation.
+- pages/demo/index.js et index.wxml : demonstration des composants, modal,
+  EventBus, Behavior et filtres WXS.
+- components/ui/ : composants reutilisables de l'interface.
+- utils/apis/http.js : appels HTTP avec wx.request.
+- utils/apis/auth.js : authentification OAuth2 et cache du token.
+- utils/apis/native.js : appels aux plugins natifs TCMPP.
+- utils/event/ : implementation de l'EventBus.
+- utils/storage.js : acces securise au stockage local.
+- utils/helpers/navigation.js : helpers de navigation wx.*.
+
+Documentation conseillee dans docs/
+-----------------------------------
+
+Ordre recommande pour comprendre le projet :
+
+1. docs/01-mini-program-concepts.md
+   Comprendre le runtime mini-programme, WXML, WXSS, WXS, Page(), Component()
+   et les APIs wx.*.
+
+2. docs/02-project-architecture.md
+   Comprendre l'architecture, les dependances et le flux de donnees.
+
+3. docs/03-getting-started.md
+   Installer les outils TCMPP, importer le projet et effectuer les premiers
+   reglages.
+
+4. docs/04-app-lifecycle.md
+   Comprendre app.js, le lancement, l'initialisation et les mises a jour.
+
+5. docs/05-eventbus-guide.md
+   Comprendre la gestion d'etat et la communication entre pages.
+
+6. docs/06-api-layer.md
+   Comprendre les appels HTTP, l'authentification et les plugins natifs.
+
+7. docs/08-components-overview.md
+   Decouvrir les composants UI disponibles et leur utilisation.
+
+8. docs/09-styling-guide.md
+   Comprendre WXSS, les variables CSS, les unites rpx et les classes utilitaires.
+
+9. docs/12-navigation-guide.md et docs/13-storage-guide.md
+   Comprendre la navigation et la persistance locale.
+
+10. docs/14-recipes.md
+    Suivre des exemples pratiques : ajouter une page, appeler une API et
+    reutiliser les composants.
+
+11. docs/15-troubleshooting.md et docs/16-glossary.md
+    Resoudre les problemes courants et retrouver la definition des termes.
+
+Demarrage pratique
+------------------
+
+Ouvrir le dossier tcmpp-boilerplate-master dans TCMPP Developer Tools. Le
+projet se compile automatiquement. Avant un vrai developpement, modifier
+notamment l'identifiant d'application dans project.config.json et la
+configuration API dans utils/config.js.
+
+Resume final
+------------
+
+Il faut considerer ce depot comme un kit de demarrage pour une mini-app
+mobile fonctionnant dans l'ecosysteme TCMPP. Il peut exploiter certaines
+fonctions natives du telephone via des plugins, mais le depot lui-meme n'est
+pas une application Android/iOS native.
